@@ -1,0 +1,33 @@
+package com.foro.forohub.controller;
+
+import com.foro.forohub.model.Topico;
+import com.foro.forohub.service.TopicoService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/topicos")
+public class TopicoController {
+
+    private final TopicoService service;
+
+    public TopicoController(TopicoService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Topico> listarTopicos() {
+        return service.listarTopicos();
+    }
+
+    @PostMapping
+    public Topico crearTopico(@RequestBody Topico topico) {
+        return service.crearTopico(topico);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarTopico(@PathVariable Long id) {
+        service.eliminarTopico(id);
+    }
+}
